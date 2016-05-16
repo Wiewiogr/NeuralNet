@@ -43,11 +43,16 @@ class Neural_net():
 		for l in self.layers:
 			output.clear()
 			for n in l.neurons:
-				val = 0
+				val = 0.
 				for w in range(len(n.weights)-1):
 					val += inputs[w] * n.weights[w]
 				val -= n.weights[-1]
-				output.append(sigm(val))
+
+				#val = sigm(val)
+
+				#val = int((val*10000)) /10000.0
+				val = math.tanh(val)
+				output.append(val)
 
 			inputs = list(output)
 

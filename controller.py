@@ -3,19 +3,19 @@ from ga import *
 from random import randint
 
 
-size_x = 800
-size_y = 600
-speed = 10
+size_x = 1280
+size_y = 800
+speed = 3
 def nnrand():
 	return (random()*2)-1
 
 def nnfit(chromo):
 	return chromo.fit
-r = 10
+r = 6
 class Eater:
 	def __init__(self):
-		self.x = randint(0,800)
-		self.y = randint(0,600)
+		self.x = randint(0,size_x)
+		self.y = randint(0,size_y)
 		self.r = r
 		self.tx = (random()*2)-1
 		self.ty = (random()*2)-1

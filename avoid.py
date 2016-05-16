@@ -7,14 +7,14 @@ def Collision(tmp):
 	for x in food:
 		for e in tmp.draw:
 			if math.sqrt((x.x - e.x)**2 + (x.y- e.y)**2) <= x.r+e.r:
-				x.x = randint(0,800)
-				x.y = randint(0,600)
+				x.x = randint(0,size_x)
+				x.y = randint(0,size_y)
 				e.fit /= 2
 
 class Food:
 	def __init__(self):
-		self.x = randint(0,800)
-		self.y = randint(0,600)
+		self.x = randint(0,size_x)
+		self.y = randint(0,size_y)
 		self.color = (0,100,255)
 		self.r = 5
 		

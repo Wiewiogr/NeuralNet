@@ -4,17 +4,20 @@ from controller import *
 
 
 def Collision(tmp):
-	for x in food:
-		for e in tmp.draw:
-			if math.sqrt((x.x - e.x)**2 + (x.y- e.y)**2) <= x.r+e.r:
-				x.x = randint(0,size_x)
-				x.y = randint(0,size_y)
-				e.fit += 1
+	for i in tmp.draw:
+		for j in tmp.draw:
+			if i != j:
+				if math.sqrt((i.x - j.x)**2 + (i.y- j.y)**2) <= i.r+j.r:
+					j.x = randint(0,800)
+					j.y = randint(0,600)
+					i.fit += 1
+					if j.fit > 1:
+						j.fit -= 1
 
 class Food:
 	def __init__(self):
-		self.x = randint(0,size_x)
-		self.y = randint(0,size_y)
+		self.x = randint(0,800)
+		self.y = randint(0,600)
 		self.color = (0,100,255)
 		self.r = 5
 		
@@ -27,11 +30,15 @@ def addFood():
 
 
 def get_input(t):
-	best = food[0]
-	for x in food:
-		if math.sqrt((x.x - t.x)**2 + (x.y- t.y)**2) < math.sqrt((best.x - t.x)**2 + (best.y- t.y)**2):
-			best = x
-	best.color =(100,100,100)
+	if evo.draw[0] != t:	
+		best = evo.draw[0]
+	else:
+		best = evo.draw[1]
+	for x in evo.draw:
+		if t != x:
+			if math.sqrt((x.x - t.x)**2 + (x.y- t.y)**2) < math.sqrt((best.x - t.x)**2 + (best.y- t.y)**2):
+				best = x
+	#best.color =(100,100,100)
 	tmp = [t.tx,t.ty,t.x-best.x,t.y-best.y]
 	return tmp
 			
@@ -79,9 +86,9 @@ while not done:
 	evo.tick()
 	for x in evo.draw:
 		pygame.draw.circle(screen,(255,100,5),(x.x,x.y),x.r)
-		pygame.draw.line(screen,(150,150,10),(x.x,x.y),(int(x.x+x.tx*10),int(x.y+x.ty*10)))
-	for x in food:
-		pygame.draw.circle(screen,x.color,(x.x,x.y),x.r)
+		pygame.draw.line(screen,(150,150,10),(x.x,x.y),(int(x.x+x.tx*100),int(x.y+x.ty*100)))
+	#for x in food:
+	#		pygame.draw.circle(screen,x.color,(x.x,x.y),x.r)
 	
 
 	pygame.display.flip()
